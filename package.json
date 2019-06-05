@@ -1,0 +1,46 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "yarn run development",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "stage": "yarn run laroute && yarn run staging",
+        "staging": "cross-env NODE_ENV=staging node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod": "yarn run laroute && yarn run production",
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch-poll": "yarn run watch --watch-poll",
+        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "laroute": "php artisan laroute:generate"
+    },
+    "devDependencies": {
+        "cross-env": "^5.1",
+        "laravel-mix": "^2.1.14"
+    },
+    "dependencies": {
+        "axios": "^0.18.1",
+        "bootstrap": "^4.3.1",
+        "bootstrap-vue": "^2.0.0-rc.22",
+        "font-awesome": "^4.7.0",
+        "ionicons": "^3.0.0",
+        "lodash": "^4.17.4",
+        "nprogress": "^0.2.0",
+        "popper.js": "^1.12",
+        "v-click-outside": "^2.1.3",
+        "vee-validate": "^2.2.9",
+        "vue": "^2.5.7",
+        "vue-avatar": "^2.1.6",
+        "vue-js-modal": "^1.3.12",
+        "vue-moment": "^4.0.0",
+        "vue-multiselect": "^2.1.0",
+        "vue-notification": "^1.3.6",
+        "vue-resource": "^1.5.0",
+        "vue-router": "^3.0.1",
+        "vue-social-sharing": "^2.4.5",
+        "vue-youtube-embed": "^2.2.1",
+        "vue2-editor": "^2.7.2",
+        "vuejs-paginate": "^1.9.0",
+        "vuejs-paginator": "^2.0.2",
+        "vuex": "^3.1.1",
+        "vuex-router-sync": "^5.0.0"
+    }
+}
