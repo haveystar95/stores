@@ -59,7 +59,7 @@
                         <!--<li>Email support</li>-->
                         <!--<li>Help center access</li>-->
                     </ul>
-                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Enter</button>
+                    <button type="button" @click="goToStore(store.id)" class="btn btn-lg btn-block btn-outline-primary">Edit</button>
                 </div>
             </div>
 
@@ -105,8 +105,14 @@
                     .catch(error => {
                         console.log(error);
                     })
+            },
+            goToStore(id) {
+                this.$router.push({ name: 'store', params: { id } });
+                console.log(id);
             }
+
         },
+
         mounted() {
             this.getStores();
         }

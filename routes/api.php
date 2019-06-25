@@ -24,13 +24,16 @@ Route::group(['prefix' => 'v1', 'as' => 'api.'], function () {
 
         Route::post('parseStore', 'StoreController@parseStore')->name('parseStore');
         Route::post('createStore', 'StoreController@createStore')->name('createStore');
+        Route::post('checkPattern', 'StoreController@checkPattern')->name('checkPattern');
+        Route::post('saveStoreSettings', 'StoreController@saveStoreSettings')->name('saveStoreSettings');
+        Route::get('getStores', 'StoreController@getStores')->name('getStores');
+
 
     });
 
     Route::group(['middleware' => 'jwt.auth'], function () {
 
         Route::post('test', 'TestController@test')->name('test');
-        Route::get('getStores', 'StoreController@getStores')->name('getStores');
     });
 
 });

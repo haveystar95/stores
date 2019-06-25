@@ -3,6 +3,7 @@ import Register from './components/Register.vue';
 import Login from './components/Login.vue';
 import Dashboard from './components/Dashboard.vue';
 import Manager from './components/Manager.vue';
+import Store from './components/Store.vue';
 
 
 
@@ -38,5 +39,10 @@ export default [
         name: 'manager',
         component: Manager,
         meta: { auth: true},
+    },
+    {
+        path: '/store/:id',
+        name: 'store',
+        component: Store,
     }
 ]

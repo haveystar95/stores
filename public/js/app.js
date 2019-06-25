@@ -332,8 +332,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 console.log(error);
             });
+        },
+        goToStore: function goToStore(id) {
+            this.$router.push({ name: 'store', params: { id: id } });
+            console.log(id);
         }
     },
+
     mounted: function mounted() {
         this.getStores();
     }
@@ -422,6 +427,187 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/Store.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "Store",
+    data: function data() {
+        return {
+            url: '',
+            name: '',
+            description: '',
+            pattern1: '',
+            pattern2: '',
+            pattern3: '',
+            store: {},
+            result: '',
+            method: 'text',
+            links: {}
+        };
+    },
+
+
+    methods: {
+        getStore: function getStore(id) {
+            var _this = this;
+
+            this.$api('getStores', { id: id }, {}).then(function (res) {
+                // this.store = res;
+                _this.url = res[0].url;
+                _this.name = res[0].name;
+                _this.description = res[0].description;
+                _this.links = res[0].links;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        checkPattern: function checkPattern(index) {
+            var _this2 = this;
+
+            this.$api('checkPattern', {}, { link: this.links[index] }).then(function (res) {
+                _this2.result = res.parse();
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        addParseField: function addParseField(index, level) {
+            console.log(index);
+            this.links[index]['parsers'].push({ 'pattern': '', 'field': '', 'property': '', 'level': '', 'look_at_main': false, 'is_body_content': false });
+        },
+        addLink: function addLink() {
+            this.links.push({ 'name': '', 'store_id': this.$route.params.id, 'url': '', 'description': '', 'parsers': [] });
+        },
+        save: function save() {
+            this.$api('saveStoreSettings', {}, { links: this.links, id: this.$route.params.id, url: this.url, name: this.name, description: this.description }).then(function (res) {}).catch(function (error) {
+                console.log(error);
+            });
+        }
+    },
+
+    mounted: function mounted() {
+        this.getStore(this.$route.params.id);
+    }
+});
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?sourceMap!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3e2ac97c\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/Login.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -445,7 +631,22 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\nbody[data-v-439d8d46] {\n    background-color: #F8F9FA;\n}\n", "", {"version":3,"sources":["/Users/soloninadenis/PhpstormProjects/laravel/resources/assets/js/components/resources/assets/js/components/Manager.vue"],"names":[],"mappings":";AAsHA;IACA,0BAAA;CACA","file":"Manager.vue","sourcesContent":["<template>\n\n\n    <div class=\"container\">\n\n            <button class=\"btn btn-primary\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseExample\" aria-expanded=\"false\" aria-controls=\"collapseExample\">\n                Add Store\n            </button>\n        <div class=\"collapse\" id=\"collapseExample\">\n            <div class=\"card card-body\">\n                <div class=\"mb-3\">\n                    <label for=\"name\">Name<span class=\"text-muted\"></span></label>\n                    <input type=\"text\" id=\"name\" v-model=\"name\" class=\"form-control\" placeholder=\"Name\">\n                </div>\n\n                <div class=\"mb-3\">\n                    <label for=\"url\">url<span class=\"text-muted\"></span></label>\n                    <input type=\"text\" id=\"url\" v-model=\"url\" class=\"form-control\" placeholder=\"url\">\n                </div>\n                <div class=\"mb-3\">\n                    <label for=\"description\">description<span class=\"text-muted\"></span></label>\n                    <input type=\"text\" id=\"description\" v-model=\"description\" class=\"form-control\" placeholder=\"description\">\n                </div>\n\n\n                <button @click=\"parseStore\" class=\"btn btn-info\">Save</button>\n            </div>\n\n        </div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n        <div class=\"card-deck mb-3 text-center\">\n\n\n            <div v-for=\"store in storesList\" class=\"card mb-4 shadow-sm\">\n                <div class=\"card-header\">\n                    <h4 class=\"my-0 font-weight-normal\">{{store.name}}</h4>\n                </div>\n                <div class=\"card-body\">\n                    <!--<h1 class=\"card-title pricing-card-title\">$0 <small class=\"text-muted\">/ mo</small></h1>-->\n                    <ul class=\"list-unstyled mt-3 mb-4\">\n                        <li>{{store.url}}</li>\n                        <li>{{store.description}}</li>\n                        <li>{{store.created_at}}</li>\n                        <!--<li>2 GB of storage</li>-->\n                        <!--<li>Email support</li>-->\n                        <!--<li>Help center access</li>-->\n                    </ul>\n                    <button type=\"button\" class=\"btn btn-lg btn-block btn-outline-primary\">Enter</button>\n                </div>\n            </div>\n\n\n        </div>\n\n\n\n\n\n    </div>\n\n\n</template>\n\n<script>\n    export default {\n        name: \"Manager\",\n\n        data() {\n            return {\n                name: null,\n                url: null,\n                description: null,\n                storesList: {}\n            }\n        },\n        methods: {\n            parseStore() {\n                this.$api('createStore', {}, {'name': this.name, 'url': this.url, 'description': this.description})\n                    .then(res => {\n                        this.getStores();\n                    })\n                    .catch(error => {\n                        this.$store.commit(\"loginFailed\", {error});\n                    })\n            },\n            getStores() {\n                this.$api('getStores', {}, {})\n                    .then(res => {\n                        this.storesList = res;\n                    })\n                    .catch(error => {\n                        console.log(error);\n                    })\n            }\n        },\n        mounted() {\n            this.getStores();\n        }\n\n    }\n</script>\n\n<style scoped>\n\n    body {\n        background-color: #F8F9FA;\n    }\n</style>\n"],"sourceRoot":""}]);
+exports.push([module.i, "\nbody[data-v-439d8d46] {\n    background-color: #F8F9FA;\n}\n", "", {"version":3,"sources":["/Users/soloninadenis/PhpstormProjects/laravel/resources/assets/js/components/resources/assets/js/components/Manager.vue"],"names":[],"mappings":";AA4HA;IACA,0BAAA;CACA","file":"Manager.vue","sourcesContent":["<template>\n\n\n    <div class=\"container\">\n\n            <button class=\"btn btn-primary\" type=\"button\" data-toggle=\"collapse\" data-target=\"#collapseExample\" aria-expanded=\"false\" aria-controls=\"collapseExample\">\n                Add Store\n            </button>\n        <div class=\"collapse\" id=\"collapseExample\">\n            <div class=\"card card-body\">\n                <div class=\"mb-3\">\n                    <label for=\"name\">Name<span class=\"text-muted\"></span></label>\n                    <input type=\"text\" id=\"name\" v-model=\"name\" class=\"form-control\" placeholder=\"Name\">\n                </div>\n\n                <div class=\"mb-3\">\n                    <label for=\"url\">url<span class=\"text-muted\"></span></label>\n                    <input type=\"text\" id=\"url\" v-model=\"url\" class=\"form-control\" placeholder=\"url\">\n                </div>\n                <div class=\"mb-3\">\n                    <label for=\"description\">description<span class=\"text-muted\"></span></label>\n                    <input type=\"text\" id=\"description\" v-model=\"description\" class=\"form-control\" placeholder=\"description\">\n                </div>\n\n\n                <button @click=\"parseStore\" class=\"btn btn-info\">Save</button>\n            </div>\n\n        </div>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n        <div class=\"card-deck mb-3 text-center\">\n\n\n            <div v-for=\"store in storesList\" class=\"card mb-4 shadow-sm\">\n                <div class=\"card-header\">\n                    <h4 class=\"my-0 font-weight-normal\">{{store.name}}</h4>\n                </div>\n                <div class=\"card-body\">\n                    <!--<h1 class=\"card-title pricing-card-title\">$0 <small class=\"text-muted\">/ mo</small></h1>-->\n                    <ul class=\"list-unstyled mt-3 mb-4\">\n                        <li>{{store.url}}</li>\n                        <li>{{store.description}}</li>\n                        <li>{{store.created_at}}</li>\n                        <!--<li>2 GB of storage</li>-->\n                        <!--<li>Email support</li>-->\n                        <!--<li>Help center access</li>-->\n                    </ul>\n                    <button type=\"button\" @click=\"goToStore(store.id)\" class=\"btn btn-lg btn-block btn-outline-primary\">Edit</button>\n                </div>\n            </div>\n\n\n        </div>\n\n\n\n\n\n    </div>\n\n\n</template>\n\n<script>\n    export default {\n        name: \"Manager\",\n\n        data() {\n            return {\n                name: null,\n                url: null,\n                description: null,\n                storesList: {}\n            }\n        },\n        methods: {\n            parseStore() {\n                this.$api('createStore', {}, {'name': this.name, 'url': this.url, 'description': this.description})\n                    .then(res => {\n                        this.getStores();\n                    })\n                    .catch(error => {\n                        this.$store.commit(\"loginFailed\", {error});\n                    })\n            },\n            getStores() {\n                this.$api('getStores', {}, {})\n                    .then(res => {\n                        this.storesList = res;\n                    })\n                    .catch(error => {\n                        console.log(error);\n                    })\n            },\n            goToStore(id) {\n                this.$router.push({ name: 'store', params: { id } });\n                console.log(id);\n            }\n\n        },\n\n        mounted() {\n            this.getStores();\n        }\n\n    }\n</script>\n\n<style scoped>\n\n    body {\n        background-color: #F8F9FA;\n    }\n</style>\n"],"sourceRoot":""}]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?sourceMap!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a783ae8c\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/Store.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(true);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Store.vue","sourceRoot":""}]);
 
 // exports
 
@@ -12029,9 +12230,14 @@ var render = function() {
               "button",
               {
                 staticClass: "btn btn-lg btn-block btn-outline-primary",
-                attrs: { type: "button" }
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.goToStore(store.id)
+                  }
+                }
               },
-              [_vm._v("Enter")]
+              [_vm._v("Edit")]
             )
           ])
         ])
@@ -12122,6 +12328,549 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-8142f38c", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-a783ae8c\",\"hasScoped\":true,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Store.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c(
+      "div",
+      { staticClass: "col-md-8 order-md-1" },
+      [
+        _c("h4", { staticClass: "mb-3" }, [_vm._v("Store")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-6 mb-3" }, [
+            _c("label", { attrs: { for: "firstName" } }, [_vm._v("Name")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.name,
+                  expression: "name"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                id: "name",
+                placeholder: "",
+                value: "{name}",
+                required: ""
+              },
+              domProps: { value: _vm.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.name = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                "\n                    Valid name is required.\n                "
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-6 mb-3" }, [
+            _c("label", { attrs: { for: "lastName" } }, [_vm._v("Url")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.url,
+                  expression: "url"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                id: "url",
+                placeholder: "",
+                value: "{url}",
+                required: ""
+              },
+              domProps: { value: _vm.url },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.url = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "invalid-feedback" }, [
+              _vm._v(
+                "\n                    Valid last name is required.\n                "
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-3" }, [
+          _c("label", { attrs: { for: "desc" } }, [_vm._v("Description")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.description,
+                expression: "description"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "desc",
+              placeholder: "Desc",
+              required: "",
+              value: "{description}"
+            },
+            domProps: { value: _vm.description },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.description = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "invalid-feedback", staticStyle: { width: "100%" } },
+            [
+              _vm._v(
+                "\n                Your username is required.\n            "
+              )
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _vm._l(this.links, function(link, index) {
+          return _c("div", { staticClass: "card" }, [
+            _c("h5", { staticClass: "card-header" }, [
+              _vm._v("Link " + _vm._s(index + 1))
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "card-body" },
+              [
+                _c("label", { attrs: { for: "link-name-" + link.id } }, [
+                  _vm._v("Name link")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: link.name,
+                      expression: "link.name"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "link-name-" + link.id,
+                    placeholder: "",
+                    value: "{link.name}",
+                    required: ""
+                  },
+                  domProps: { value: link.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(link, "name", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "link-url-" + link.id } }, [
+                  _vm._v("Url link")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: link.url,
+                      expression: "link.url"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "link-url-" + link.id,
+                    placeholder: "",
+                    value: "{link.url}",
+                    required: ""
+                  },
+                  domProps: { value: link.url },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(link, "url", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm._l(link["parsers"], function(parser, indexP) {
+                  return _c("div", [
+                    _c("div", { staticClass: "jumbotron" }, [
+                      _c(
+                        "label",
+                        { attrs: { for: "parser-level-" + link.id } },
+                        [_vm._v("Level")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: parser.level,
+                            expression: "parser.level"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "parser-level-" + link.id,
+                          placeholder: "",
+                          value: "{parser.level}",
+                          required: ""
+                        },
+                        domProps: { value: parser.level },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(parser, "level", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("label", { attrs: { for: "parser-id-" + link.id } }, [
+                        _vm._v("Pattern")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "textarea",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: parser.pattern,
+                              expression: "parser.pattern"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { id: "parser-id-" + link.id },
+                          domProps: { value: parser.pattern },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(parser, "pattern", $event.target.value)
+                            }
+                          }
+                        },
+                        [_vm._v(_vm._s(parser.pattern))]
+                      ),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        { attrs: { for: "parser-attribute-" + link.id } },
+                        [_vm._v("Атрибут")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: parser.property,
+                            expression: "parser.property"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "parser-attribute-" + link.id,
+                          placeholder: "",
+                          value: "{parser.property}",
+                          required: ""
+                        },
+                        domProps: { value: parser.property },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(parser, "property", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        { attrs: { for: "parser-field-" + link.id } },
+                        [_vm._v("Поле")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: parser.field,
+                            expression: "parser.field"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "parser-field-" + link.id,
+                          placeholder: "",
+                          value: "{parser.field}",
+                          required: ""
+                        },
+                        domProps: { value: parser.field },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(parser, "field", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      indexP === 0
+                        ? _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: parser.is_body_content,
+                                expression: "parser.is_body_content"
+                              }
+                            ],
+                            staticClass: "form-check-input",
+                            attrs: {
+                              type: "checkbox",
+                              id: "parser-body-content-" + link.id,
+                              value: "{parser.is_body_content}",
+                              required: ""
+                            },
+                            domProps: {
+                              checked: Array.isArray(parser.is_body_content)
+                                ? _vm._i(
+                                    parser.is_body_content,
+                                    "{parser.is_body_content}"
+                                  ) > -1
+                                : parser.is_body_content
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$a = parser.is_body_content,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = "{parser.is_body_content}",
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        parser,
+                                        "is_body_content",
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        parser,
+                                        "is_body_content",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
+                                } else {
+                                  _vm.$set(parser, "is_body_content", $$c)
+                                }
+                              }
+                            }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      indexP === 0
+                        ? _c(
+                            "label",
+                            {
+                              staticClass: "form-check-label",
+                              attrs: { for: "parser-body-content-" + link.id }
+                            },
+                            [_vm._v("Основной контент")]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: parser.look_at_main,
+                            expression: "parser.look_at_main"
+                          }
+                        ],
+                        staticClass: "form-check-input",
+                        attrs: {
+                          type: "checkbox",
+                          id: "parser-look-at-main-" + link.id,
+                          value: "{parser.look_at_main}",
+                          required: ""
+                        },
+                        domProps: {
+                          checked: Array.isArray(parser.look_at_main)
+                            ? _vm._i(
+                                parser.look_at_main,
+                                "{parser.look_at_main}"
+                              ) > -1
+                            : parser.look_at_main
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = parser.look_at_main,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = "{parser.look_at_main}",
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    parser,
+                                    "look_at_main",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    parser,
+                                    "look_at_main",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(parser, "look_at_main", $$c)
+                            }
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-check-label",
+                          attrs: { for: "parser-look-at-main-" + link.id }
+                        },
+                        [_vm._v("Парсить с главной ссылки")]
+                      ),
+                      _vm._v(" "),
+                      _c("hr")
+                    ])
+                  ])
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-info mt-4",
+                on: {
+                  click: function($event) {
+                    return _vm.addParseField(index, 1)
+                  }
+                }
+              },
+              [_vm._v("Add parse fields")]
+            )
+          ])
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-dark", on: { click: _vm.addLink } },
+          [_vm._v(" Add Link")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-info mt-4", on: { click: _vm.save } },
+          [_vm._v("Save")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-info mt-4",
+            on: {
+              click: function($event) {
+                return _vm.checkPattern(_vm.index)
+              }
+            }
+          },
+          [_vm._v("Check")]
+        )
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-a783ae8c", module.exports)
   }
 }
 
@@ -12479,6 +13228,33 @@ if(false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js?sourceMap!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a783ae8c\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/Store.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js?sourceMap!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a783ae8c\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/Store.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("1d065850", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js?sourceMap!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a783ae8c\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Store.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js?sourceMap!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a783ae8c\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Store.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js?sourceMap!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-f88ac34c\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/Register.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12783,6 +13559,9 @@ module.exports = function listToStyles (parentId, list) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Dashboard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Dashboard_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Manager_vue__ = __webpack_require__("./resources/assets/js/components/Manager.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Manager_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Manager_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Store_vue__ = __webpack_require__("./resources/assets/js/components/Store.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Store_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Store_vue__);
+
 
 
 
@@ -12816,6 +13595,10 @@ module.exports = function listToStyles (parentId, list) {
     name: 'manager',
     component: __WEBPACK_IMPORTED_MODULE_4__components_Manager_vue___default.a,
     meta: { auth: true }
+}, {
+    path: '/store/:id',
+    name: 'store',
+    component: __WEBPACK_IMPORTED_MODULE_5__components_Store_vue___default.a
 }]);
 
 /***/ }),
@@ -12997,7 +13780,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && 
 
             absolute: false,
             rootUrl: 'local.laravel.com',
-            routes: [{ "host": null, "methods": ["POST"], "uri": "api\/v1\/auth\/register", "name": "api.register", "action": "App\Http\Controllers\AuthController@register" }, { "host": null, "methods": ["POST"], "uri": "api\/v1\/auth\/login", "name": "api.login", "action": "App\Http\Controllers\AuthController@login" }, { "host": null, "methods": ["POST"], "uri": "api\/v1\/auth\/logout", "name": "api.", "action": "App\Http\Controllers\AuthController@logout" }, { "host": null, "methods": ["POST"], "uri": "api\/v1\/auth\/refresh", "name": "api.", "action": "App\Http\Controllers\AuthController@refresh" }, { "host": null, "methods": ["POST"], "uri": "api\/v1\/auth\/me", "name": "api.", "action": "App\Http\Controllers\AuthController@me" }, { "host": null, "methods": ["POST"], "uri": "api\/v1\/auth\/parseStore", "name": "api.parseStore", "action": "App\Http\Controllers\StoreController@parseStore" }, { "host": null, "methods": ["POST"], "uri": "api\/v1\/auth\/createStore", "name": "api.createStore", "action": "App\Http\Controllers\StoreController@createStore" }, { "host": null, "methods": ["POST"], "uri": "api\/v1\/test", "name": "api.test", "action": "App\Http\Controllers\TestController@test" }, { "host": null, "methods": ["GET", "HEAD"], "uri": "api\/v1\/getStores", "name": "api.getStores", "action": "App\Http\Controllers\StoreController@getStores" }],
+            routes: [{ "host": null, "methods": ["POST"], "uri": "api\/v1\/auth\/register", "name": "api.register", "action": "App\Http\Controllers\AuthController@register" }, { "host": null, "methods": ["POST"], "uri": "api\/v1\/auth\/login", "name": "api.login", "action": "App\Http\Controllers\AuthController@login" }, { "host": null, "methods": ["POST"], "uri": "api\/v1\/auth\/logout", "name": "api.", "action": "App\Http\Controllers\AuthController@logout" }, { "host": null, "methods": ["POST"], "uri": "api\/v1\/auth\/refresh", "name": "api.", "action": "App\Http\Controllers\AuthController@refresh" }, { "host": null, "methods": ["POST"], "uri": "api\/v1\/auth\/me", "name": "api.", "action": "App\Http\Controllers\AuthController@me" }, { "host": null, "methods": ["POST"], "uri": "api\/v1\/auth\/parseStore", "name": "api.parseStore", "action": "App\Http\Controllers\StoreController@parseStore" }, { "host": null, "methods": ["POST"], "uri": "api\/v1\/auth\/createStore", "name": "api.createStore", "action": "App\Http\Controllers\StoreController@createStore" }, { "host": null, "methods": ["POST"], "uri": "api\/v1\/auth\/checkPattern", "name": "api.checkPattern", "action": "App\Http\Controllers\StoreController@checkPattern" }, { "host": null, "methods": ["POST"], "uri": "api\/v1\/auth\/saveStoreSettings", "name": "api.saveStoreSettings", "action": "App\Http\Controllers\StoreController@saveStoreSettings" }, { "host": null, "methods": ["GET", "HEAD"], "uri": "api\/v1\/auth\/getStores", "name": "api.getStores", "action": "App\Http\Controllers\StoreController@getStores" }, { "host": null, "methods": ["POST"], "uri": "api\/v1\/test", "name": "api.test", "action": "App\Http\Controllers\TestController@test" }],
             prefix: '',
 
             route: function route(name, parameters, _route) {
@@ -13632,6 +14415,58 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-f88ac34c", Component.options)
   } else {
     hotAPI.reload("data-v-f88ac34c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/Store.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js?sourceMap!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-a783ae8c\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/assets/js/components/Store.vue")
+}
+var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
+/* script */
+var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/Store.vue")
+/* template */
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-a783ae8c\",\"hasScoped\":true,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/Store.vue")
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-a783ae8c"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Store.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-a783ae8c", Component.options)
+  } else {
+    hotAPI.reload("data-v-a783ae8c", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

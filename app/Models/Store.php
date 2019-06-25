@@ -12,4 +12,10 @@ class Store extends Model
         'url',
         'description',
     ];
+
+
+    public function links()
+    {
+        return $this->hasMany(Link::class);
+    }
 }
